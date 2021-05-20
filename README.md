@@ -133,30 +133,30 @@ Paste the following into `.vscode/launch.json`
 
 ```JSON
 {
-  "version": "0.2.0",
-  "configurations": [
+   " versión " : " 0.2.0 " ,
+   " configuraciones " : [
     {
-      "name": "Debug Main Process",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "program": "${workspaceFolder}/node_modules/electron/cli.js",
-      "args" : ["."],
-      "outputCapture": "std"
+      " name " : " Debug Main Process " ,
+       " type " : " node " ,
+       " request " : " launch " ,
+       " cwd " : " $ {workspaceFolder} " ,
+       " program " : " $ {workspaceFolder} / node_modules / electron /cli.js " ,
+       " args " : [ " ." ],
+       "OutputCapture " : " std "
     },
     {
-      "name": "Debug Renderer Process",
-      "type": "chrome",
-      "request": "launch",
-      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
-      "windows": {
-        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+      " name " : " Debug Renderer Process " ,
+       " type " : " chrome " ,
+       " request " : " launch " ,
+       " runtimeExecutable " : " $ {workspaceFolder} /node_modules/.bin/electron " ,
+       " windows " : {
+         " runtimeExecutable " : " $ {workspaceFolder} /node_modules/.bin/electron.cmd "
       },
-      "runtimeArgs": [
-        "${workspaceFolder}/.",
-        "--remote-debugging-port=9222"
+      " runtimeArgs " : [
+         " $ {workspaceFolder} /. " ,
+         " --remote-debugging-port = 9222 "
       ],
-      "webRoot": "${workspaceFolder}"
+      " webRoot " : " $ {workspaceFolder} "
     }
   ]
 }
