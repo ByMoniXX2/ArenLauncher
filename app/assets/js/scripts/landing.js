@@ -85,7 +85,7 @@ function setLaunchEnabled(val){
 
 // Bind launch button
 document.getElementById('launch_button').addEventListener('click', function(e){
-    loggerLanding.log('Abriendo juego..')
+    loggerLanding.log('Launching game..')
     const mcVersion = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer()).getMinecraftVersion()
     const jExe = ConfigManager.getJavaExecutable()
     if(jExe == null){
@@ -124,7 +124,7 @@ document.getElementById('avatarOverlay').onclick = (e) => {
 
 // Bind selected account
 function updateSelectedAccount(authUser){
-    let username = 'Sin cuenta seleccionada'
+    let username = 'No Account Selected'
     if(authUser != null){
         if(authUser.displayName != null){
             username = authUser.displayName
@@ -144,14 +144,14 @@ function updateSelectedServer(serv){
     }
     ConfigManager.setSelectedServer(serv != null ? serv.getID() : null)
     ConfigManager.save()
-    server_selection_button.innerHTML = '\u2022 ' + (serv != null ? serv.getName() : 'Sin servidor elegido')
+    server_selection_button.innerHTML = '\u2022 ' + (serv != null ? serv.getName() : 'No Server Selected')
     if(getCurrentView() === VIEWS.settings){
         animateModsTabRefresh()
     }
     setLaunchEnabled(serv != null)
 }
 // Real text is set in uibinder.js on distributionIndexDone.
-server_selection_button.innerHTML = '\u2022 Cargando..'
+server_selection_button.innerHTML = '\u2022 Loading..'
 server_selection_button.onclick = (e) => {
     e.target.blur()
     toggleServerSelection(true)
@@ -159,7 +159,7 @@ server_selection_button.onclick = (e) => {
 
 // Update Mojang Status Color
 const refreshMojangStatuses = async function(){
-    loggerLanding.log('Recargando estados de Mojang..')
+    loggerLanding.log('Refreshing Mojang Statuses..')
 
     let status = 'grey'
     let tooltipEssentialHTML = ''
@@ -172,11 +172,6 @@ const refreshMojangStatuses = async function(){
 
         for(let i=0; i<statuses.length; i++){
             const service = statuses[i]
-
-            // Mojang API is broken for these two. https://bugs.mojang.com/browse/WEB-2303
-            if(service.service === 'sessionserver.mojang.com' || service.service === 'minecraft.net') {
-                service.status = 'green'
-            }
 
             if(service.essential){
                 tooltipEssentialHTML += `<div class="mojangStatusContainer">
@@ -212,7 +207,7 @@ const refreshMojangStatuses = async function(){
         }
 
     } catch (err) {
-        loggerLanding.warn('Incapaz de recargar el estado de Mojang.')
+        loggerLanding.warn('Unable to refresh Mojang service status.')
         loggerLanding.debug(err)
     }
     
@@ -222,7 +217,7 @@ const refreshMojangStatuses = async function(){
 }
 
 const refreshServerStatus = async function(fade = false){
-    loggerLanding.log('Refrescando el estado del servidor...')
+    loggerLanding.log('Refreshing Server Status')
     const serv = DistroManager.getDistribution().getServer(ConfigManager.getSelectedServer())
 
     let pLabel = 'SERVER'
@@ -232,12 +227,12 @@ const refreshServerStatus = async function(fade = false){
         const serverURL = new URL('my://' + serv.getAddress())
         const servStat = await ServerStatus.getStatus(serverURL.hostname, serverURL.port)
         if(servStat.online){
-            pLabel = 'JUGADORES'
+            pLabel = 'PLAYERS'
             pVal = servStat.onlinePlayers + '/' + servStat.maxPlayers
         }
 
     } catch (err) {
-        loggerLanding.warn('Incapaz de refrescar el estado del servidor.')
+        loggerLanding.warn('Unable to refresh server status, assuming offline.')
         loggerLanding.debug(err)
     }
     if(fade){
@@ -257,8 +252,8 @@ refreshMojangStatuses()
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
 // Set refresh rate to once every 5 minutes.
-let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 600000)
-let serverStatusListener = setInterval(() => refreshServerStatus(true), 600000)
+let mojangStatusListener = setInterval(() => refreshMojangStatuses(true), 300000)
+let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
 
 /**
  * Shows an error overlay, toggles off the launch area.
@@ -292,7 +287,7 @@ let extractListener
  */
 function asyncSystemScan(mcVersion, launchAfter = true){
 
-    setLaunchDetails('Por favor, espera..')
+    setLaunchDetails('Please wait..')
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
 
@@ -327,13 +322,13 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                 // If the result is null, no valid Java installation was found.
                 // Show this information to the user.
                 setOverlayContent(
-                    'No se encontro<br>una instalacion de Java compatible',
-                    'Para entrar a Farfania, necesitas una instalacion de 64 bits de java 8. Queres que te instalemos una copia? Al instalar, aceptas <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">los terminos y condiciones de Oracle.</a>.',
-                    'Instalar java',
-                    'Instalar manualmente'
+                    'No Compatible<br>Java Installation Found',
+                    'In order to join WesterosCraft, you need a 64-bit installation of Java 8. Would you like us to install a copy? By installing, you accept <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">Oracle\'s license agreement</a>.',
+                    'Install Java',
+                    'Install Manually'
                 )
                 setOverlayHandler(() => {
-                    setLaunchDetails('Preparando descarga de java..')
+                    setLaunchDetails('Preparing Java Download..')
                     sysAEx.send({task: 'changeContext', class: 'AssetGuard', args: [ConfigManager.getCommonDirectory(),ConfigManager.getJavaExecutable()]})
                     sysAEx.send({task: 'execute', function: '_enqueueOpenJDK', argsArr: [ConfigManager.getDataDirectory()]})
                     toggleOverlay(false)
@@ -342,10 +337,10 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                     $('#overlayContent').fadeOut(250, () => {
                         //$('#overlayDismiss').toggle(false)
                         setOverlayContent(
-                            'Java es requerido<br>para abrir el juego',
-                            'Una instalacion valida de java es requerida.',
-                            'Lo entiendo',
-                            'Volver atras'
+                            'Java is Required<br>to Launch',
+                            'A valid x64 installation of Java 8 is required to launch.<br><br>Please refer to our <a href="https://github.com/dscalzi/HeliosLauncher/wiki/Java-Management#manually-installing-a-valid-version-of-java">Java Management Guide</a> for instructions on how to manually install Java.',
+                            'I Understand',
+                            'Go Back'
                         )
                         setOverlayHandler(() => {
                             toggleLaunchArea(false)
@@ -380,7 +375,7 @@ function asyncSystemScan(mcVersion, launchAfter = true){
             if(m.result === true){
 
                 // Oracle JRE enqueued successfully, begin download.
-                setLaunchDetails('Descargando java..')
+                setLaunchDetails('Downloading Java..')
                 sysAEx.send({task: 'execute', function: 'processDlQueues', argsArr: [[{id:'java', limit:1}]]})
 
             } else {
@@ -388,9 +383,9 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                 // Oracle JRE enqueue failed. Probably due to a change in their website format.
                 // User will have to follow the guide to install Java.
                 setOverlayContent(
-                    'Error inesperado:<br>Descarga de java fallida',
-                    'Hubo un error desconocido, instala java manualmente!',
-                    'Lo entiendo'
+                    'Unexpected Issue:<br>Java Download Failed',
+                    'Unfortunately we\'ve encountered an issue while attempting to install Java. You will need to manually install a copy. Please check out our <a href="https://github.com/dscalzi/HeliosLauncher/wiki">Troubleshooting Guide</a> for more details and instructions.',
+                    'I Understand'
                 )
                 setOverlayHandler(() => {
                     toggleOverlay(false)
@@ -444,7 +439,7 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                         extractListener = null
                     }
 
-                    setLaunchDetails('Java instalado!')
+                    setLaunchDetails('Java Installed!')
 
                     if(launchAfter){
                         dlAsync()
@@ -460,7 +455,7 @@ function asyncSystemScan(mcVersion, launchAfter = true){
     })
 
     // Begin system Java scan.
-    setLaunchDetails('Revisando info del sistema..')
+    setLaunchDetails('Checking system info..')
     sysAEx.send({task: 'execute', function: 'validateJava', argsArr: [ConfigManager.getDataDirectory()]})
 
 }
@@ -489,12 +484,12 @@ function dlAsync(login = true){
 
     if(login) {
         if(ConfigManager.getSelectedAccount() == null){
-            loggerLanding.error('Debes ingresar a una cuenta.')
+            loggerLanding.error('You must be logged into an account.')
             return
         }
     }
 
-    setLaunchDetails('Por favor, espera..')
+    setLaunchDetails('Please wait..')
     toggleLaunchArea(true)
     setLaunchPercentage(0, 100)
 
@@ -524,13 +519,13 @@ function dlAsync(login = true){
         loggerAEx.log(data)
     })
     aEx.on('error', (err) => {
-        loggerLaunchSuite.error('Error durante el lanzamiento', err)
-        showLaunchFailure('Error durante el lanzamiento', err.message || 'Revisa la consola (CTRL + i) para mas detalles y reportalo a Chesvin1!.')
+        loggerLaunchSuite.error('Error during launch', err)
+        showLaunchFailure('Error During Launch', err.message || 'See console (CTRL + Shift + i) for more details.')
     })
     aEx.on('close', (code, signal) => {
         if(code !== 0){
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error durante el lanzamiento', 'Revisa la consola (CTRL + i) para mas detalles y reportalo a Chesvin1!')
+            showLaunchFailure('Error During Launch', 'See console (CTRL + Shift + i) for more details.')
         }
     })
 
@@ -542,27 +537,27 @@ function dlAsync(login = true){
                 case 'distribution':
                     setLaunchPercentage(20, 100)
                     loggerLaunchSuite.log('Validated distibution index.')
-                    setLaunchDetails('Cargando informacion de version..')
+                    setLaunchDetails('Loading version information..')
                     break
                 case 'version':
                     setLaunchPercentage(40, 100)
-                    loggerLaunchSuite.log('Informacion de version cargada.')
-                    setLaunchDetails('Validando integridad de archivos..')
+                    loggerLaunchSuite.log('Version data loaded.')
+                    setLaunchDetails('Validating asset integrity..')
                     break
                 case 'assets':
                     setLaunchPercentage(60, 100)
-                    loggerLaunchSuite.log('Validacion de archivos completada')
-                    setLaunchDetails('Validando la integridad de las librerias..')
+                    loggerLaunchSuite.log('Asset Validation Complete')
+                    setLaunchDetails('Validating library integrity..')
                     break
                 case 'libraries':
                     setLaunchPercentage(80, 100)
-                    loggerLaunchSuite.log('Validacion de librerias completada.')
-                    setLaunchDetails('Validando archivos miscelaneos..')
+                    loggerLaunchSuite.log('Library validation complete.')
+                    setLaunchDetails('Validating miscellaneous file integrity..')
                     break
                 case 'files':
                     setLaunchPercentage(100, 100)
-                    loggerLaunchSuite.log('Validacion de archivos completada.')
-                    setLaunchDetails('Descargando archivos..')
+                    loggerLaunchSuite.log('File validation complete.')
+                    setLaunchDetails('Downloading files..')
                     break
             }
         } else if(m.context === 'progress'){
@@ -580,7 +575,7 @@ function dlAsync(login = true){
                     remote.getCurrentWindow().setProgressBar(2)
 
                     // Download done, extracting.
-                    const eLStr = 'Extrayendo librerias...'
+                    const eLStr = 'Extracting libraries'
                     let dotStr = ''
                     setLaunchDetails(eLStr)
                     progressListener = setInterval(() => {
@@ -604,23 +599,23 @@ function dlAsync(login = true){
                         progressListener = null
                     }
 
-                    setLaunchDetails('Preparando para lanzar..')
+                    setLaunchDetails('Preparing to launch..')
                     break
             }
         } else if(m.context === 'error'){
             switch(m.data){
                 case 'download':
-                    loggerLaunchSuite.error('Error durante la descarga:', m.error)
+                    loggerLaunchSuite.error('Error while downloading:', m.error)
                     
                     if(m.error.code === 'ENOENT'){
                         showLaunchFailure(
-                            'Error de descarga',
-                            'No se pudo conectar al servidor de archivos, asegurate que estas conectado a Internet.'
+                            'Download Error',
+                            'Could not connect to the file server. Ensure that you are connected to the internet and try again.'
                         )
                     } else {
                         showLaunchFailure(
-                            'Error de descarga',
-                            'Revisa la consola (CTRL + i) para mas detalles. Intentalo de nuevo.'
+                            'Download Error',
+                            'Check the console (CTRL + Shift + i) for more details. Please try again.'
                         )
                     }
 
@@ -636,10 +631,10 @@ function dlAsync(login = true){
 
             // If these properties are not defined it's likely an error.
             if(m.result.forgeData == null || m.result.versionData == null){
-                loggerLaunchSuite.error('Error durante la validacion:', m.result)
+                loggerLaunchSuite.error('Error during validation:', m.result)
 
-                loggerLaunchSuite.error('Error durante la validacion', m.result.error)
-                showLaunchFailure('Error durante el lanzamiento', 'Revisa la consola para mas detalles (CTRL + i)')
+                loggerLaunchSuite.error('Error during launch', m.result.error)
+                showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
 
                 allGood = false
             }
@@ -651,7 +646,7 @@ function dlAsync(login = true){
                 const authUser = ConfigManager.getSelectedAccount()
                 loggerLaunchSuite.log(`Sending selected account (${authUser.displayName}) to ProcessBuilder.`)
                 let pb = new ProcessBuilder(serv, versionData, forgeData, authUser, remote.app.getVersion())
-                setLaunchDetails('Lanzando juego..')
+                setLaunchDetails('Launching game..')
 
                 // const SERVER_JOINED_REGEX = /\[.+\]: \[CHAT\] [a-zA-Z0-9_]{1,16} joined the game/
                 const SERVER_JOINED_REGEX = new RegExp(`\\[.+\\]: \\[CHAT\\] ${authUser.displayName} joined the game`)
@@ -686,17 +681,17 @@ function dlAsync(login = true){
                 const gameStateChange = function(data){
                     data = data.trim()
                     if(SERVER_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('En la aduana...')
+                        DiscordWrapper.updateDetails('Exploring the Realm!')
                     } else if(GAME_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Laburando en el pais')
+                        DiscordWrapper.updateDetails('Sailing to Westeros!')
                     }
                 }
 
                 const gameErrorListener = function(data){
                     data = data.trim()
-                    if(data.indexOf('No se pudo cargar o encontrar el main class net.minecraft.launchwrapper.Launch') > -1){
-                        loggerLaunchSuite.error('Descarga del juego fallida, LaunchWrapper no fue descargado exitosamente.')
-                        showLaunchFailure('Error durante el lanzamiento', 'El archivo principal, LaunchWrapper, fallo al descargar. Como resultado, el juego no puede abrirse.<br><br>Para arreglar esto, apaga temporalmente tu antivirus e intentalo otra vez.')
+                    if(data.indexOf('Could not find or load main class net.minecraft.launchwrapper.Launch') > -1){
+                        loggerLaunchSuite.error('Game launch failed, LaunchWrapper was not downloaded properly.')
+                        showLaunchFailure('Error During Launch', 'The main file, LaunchWrapper, failed to download properly. As a result, the game cannot launch.<br><br>To fix this issue, temporarily turn off your antivirus software and launch the game again.<br><br>If you have time, please <a href="https://github.com/dscalzi/HeliosLauncher/issues">submit an issue</a> and let us know what antivirus software you use. We\'ll contact them and try to straighten things out.')
                     }
                 }
 
@@ -708,7 +703,7 @@ function dlAsync(login = true){
                     proc.stdout.on('data', tempListener)
                     proc.stderr.on('data', gameErrorListener)
 
-                    setLaunchDetails('Listo. Disfruta de Farfania!')
+                    setLaunchDetails('Done. Enjoy the server!')
 
                     // Init Discord Hook
                     const distro = DistroManager.getDistribution()
@@ -725,8 +720,8 @@ function dlAsync(login = true){
 
                 } catch(err) {
 
-                    loggerLaunchSuite.error('Error durante el lanzamiento', err)
-                    showLaunchFailure('Error durante el lanzamiento', 'Revisa la consola para mas detalles (CTRL + i)')
+                    loggerLaunchSuite.error('Error during launch', err)
+                    showLaunchFailure('Error During Launch', 'Please check the console (CTRL + Shift + i) for more details.')
 
                 }
             }
@@ -740,22 +735,22 @@ function dlAsync(login = true){
     // Begin Validations
 
     // Validate Forge files.
-    setLaunchDetails('Cargando informacion del servidor..')
+    setLaunchDetails('Loading server information..')
 
     refreshDistributionIndex(true, (data) => {
         onDistroRefresh(data)
         serv = data.getServer(ConfigManager.getSelectedServer())
         aEx.send({task: 'execute', function: 'validateEverything', argsArr: [ConfigManager.getSelectedServer(), DistroManager.isDevMode()]})
     }, (err) => {
-        loggerLaunchSuite.log('Error tratando de conseguir una copia del distribution index.', err)
+        loggerLaunchSuite.log('Error while fetching a fresh copy of the distribution index.', err)
         refreshDistributionIndex(false, (data) => {
             onDistroRefresh(data)
             serv = data.getServer(ConfigManager.getSelectedServer())
             aEx.send({task: 'execute', function: 'validateEverything', argsArr: [ConfigManager.getSelectedServer(), DistroManager.isDevMode()]})
         }, (err) => {
-            loggerLaunchSuite.error('Fallo al intentar recargar el distribution index.', err)
+            loggerLaunchSuite.error('Unable to refresh distribution index.', err)
             if(DistroManager.getDistribution() == null){
-                showLaunchFailure('Error fatal', 'Fallo al intentar recargar el distribution index!!!!. Contactate con Chesvin1 urgentemente.')
+                showLaunchFailure('Fatal Error', 'Could not load a copy of the distribution index. See the console (CTRL + Shift + i) for more details.')
 
                 // Disconnect from AssetExec
                 aEx.disconnect()
@@ -867,7 +862,7 @@ let newsLoadingListener = null
  */
 function setNewsLoading(val){
     if(val){
-        const nLStr = 'Revisando si hay noticias'
+        const nLStr = 'Checking for News'
         let dotStr = '..'
         nELoadSpan.innerHTML = nLStr + dotStr
         newsLoadingListener = setInterval(() => {
