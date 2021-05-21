@@ -525,12 +525,12 @@ function dlAsync(login = true){
     })
     aEx.on('error', (err) => {
         loggerLaunchSuite.error('Error durante el lanzamiento', err)
-        showLaunchFailure('Error durante el lanzamiento', err.message || 'Revisa la consola (CTRL + i) para mas detalles y reportalo a Chesvin1!.')
+        showLaunchFailure('Error durante el lanzamiento', err.message || 'Revisa la consola (CTRL + i) para mas detalles y reportalo a ByMoniXX!.')
     })
     aEx.on('close', (code, signal) => {
         if(code !== 0){
             loggerLaunchSuite.error(`AssetExec exited with code ${code}, assuming error.`)
-            showLaunchFailure('Error durante el lanzamiento', 'Revisa la consola (CTRL + i) para mas detalles y reportalo a Chesvin1!')
+            showLaunchFailure('Error durante el lanzamiento', 'Revisa la consola (CTRL + i) para mas detalles y reportalo a ByMoniXX!')
         }
     })
 
@@ -755,7 +755,7 @@ function dlAsync(login = true){
         }, (err) => {
             loggerLaunchSuite.error('Fallo al intentar recargar el distribution index.', err)
             if(DistroManager.getDistribution() == null){
-                showLaunchFailure('Error fatal', 'Fallo al intentar recargar el distribution index!!!!. Contactate con Chesvin1 urgentemente.')
+                showLaunchFailure('Error fatal', 'Fallo al intentar recargar el distribution index!!!!. Contactate con ByMoniXX urgentemente.')
 
                 // Disconnect from AssetExec
                 aEx.disconnect()
