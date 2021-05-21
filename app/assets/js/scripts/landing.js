@@ -328,7 +328,7 @@ function asyncSystemScan(mcVersion, launchAfter = true){
                 // Show this information to the user.
                 setOverlayContent(
                     'No se encontro<br>una instalacion de Java compatible',
-                    'Para entrar a Farfania, necesitas una instalacion de 64 bits de java 8. Queres que te instalemos una copia? Al instalar, aceptas <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">los terminos y condiciones de Oracle.</a>.',
+                    'Para entrar a Aren, necesitas una instalacion de 64 bits de java 8. Queres que te instalemos una copia? Al instalar, aceptas <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html">los terminos y condiciones de Oracle.</a>.',
                     'Instalar java',
                     'Instalar manualmente'
                 )
@@ -708,7 +708,7 @@ function dlAsync(login = true){
                     proc.stdout.on('data', tempListener)
                     proc.stderr.on('data', gameErrorListener)
 
-                    setLaunchDetails('Listo. Disfruta de Farfania!')
+                    setLaunchDetails('Listo. Disfruta de Aren Server!')
 
                     // Init Discord Hook
                     const distro = DistroManager.getDistribution()
