@@ -686,9 +686,9 @@ function dlAsync(login = true){
                 const gameStateChange = function(data){
                     data = data.trim()
                     if(SERVER_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('En la aduana...')
+                        DiscordWrapper.updateDetails('En el Pueblo...')
                     } else if(GAME_JOINED_REGEX.test(data)){
-                        DiscordWrapper.updateDetails('Laburando en el pais')
+                        DiscordWrapper.updateDetails('En el Pueblo')
                     }
                 }
 
