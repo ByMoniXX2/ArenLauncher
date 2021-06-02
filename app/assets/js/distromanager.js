@@ -537,8 +537,8 @@ exports.pullRemote = function(){
         return exports.pullLocal()
     }
     return new Promise((resolve, reject) => {
-        const distroURL = 'https://gist.githubusercontent.com/ByMoniXX2/5cae639ee1b270bfb9b4e1ac57af31d2/raw/fe83fb05ddced8fe6e31865bfe9aafd95d8e3277/distribution.json'
-        //const distroURL = 'https://gist.githubusercontent.com/ByMoniXX2/5cae639ee1b270bfb9b4e1ac57af31d2/raw/fe83fb05ddced8fe6e31865bfe9aafd95d8e3277/distribution.json'
+        const distroURL = 'https://gist.githubusercontent.com/ByMoniXX2/5cae639ee1b270bfb9b4e1ac57af31d2/raw/12cc50e2b6dfd95e49dea6af2285110ecedb3de0/distribution.json'
+        //const distroURL = 'https://gist.githubusercontent.com/ByMoniXX2/5cae639ee1b270bfb9b4e1ac57af31d2/raw/12cc50e2b6dfd95e49dea6af2285110ecedb3de0/distribution.json'
         const opts = {
             url: distroURL,
             timeout: 10000
