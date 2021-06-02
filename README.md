@@ -1,4 +1,4 @@
-<p align="center"><img src="./app/assets/images/SealCircle.png" width="1024px" height="1024px" alt="aventium softworks"></p>
+<p align="center"><img src="./app/assets/images/SealCircle.png" width="720px" height="720px" alt="aventium softworks"></p>
 
 <h1 align="center">AREN LAUNCHER</h1>
 
