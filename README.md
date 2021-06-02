@@ -1,6 +1,6 @@
 <p align="center"><img src="./app/assets/images/SealCircle.png" width="1024px" height="1024px" alt="aventium softworks"></p>
 
-<h1 align="center">Farfania Launcher</h1>
+<h1 align="center">AREN LAUNCHER</h1>
 
 <em><h5 align="center">(fork of Helios)</h5></em>
 
