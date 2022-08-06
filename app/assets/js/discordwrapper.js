@@ -6,19 +6,31 @@ const {Client} = require('discord-rpc')
 let client
 let activity
 
+<<<<<<< HEAD
 exports.initRPC = function(genSettings, servSettings, initialDetails = 'En attente du client...'){
+=======
+exports.initRPC = function(genSettings, servSettings, initialDetails = 'Tramitando en la aduana...'){
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
     client = new Client({ transport: 'ipc' })
 
     activity = {
         details: initialDetails,
+<<<<<<< HEAD
         largeImageKey: genSettings.smallImageKey,
         largeImageText: genSettings.smallImageText,
+=======
+        state: 'Servidor: ' + servSettings.shortId,
+        largeImageKey: servSettings.largeImageKey,
+        largeImageText: servSettings.largeImageText,
+        smallImageKey: genSettings.smallImageKey,
+        smallImageText: genSettings.smallImageText,
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
         startTimestamp: new Date().getTime(),
         instance: false
     }
 
     client.on('ready', () => {
-        logger.log('Discord RPC Connected')
+        logger.log('Discord RPC conectado')
         client.setActivity(activity)
     })
     

@@ -127,9 +127,15 @@ function showFatalStartupError(){
         $('#loadingContainer').fadeOut(250, () => {
             document.getElementById('overlayContainer').style.background = 'none'
             setOverlayContent(
+<<<<<<< HEAD
                 'Erreur fatale: Impossible de télécharger les mises à jour',
                 'Nous n\'avons pas pu nous connecter à notre serveur afin de télécharger les mises à jour. Aucune copie locale n\'a été trouvée.',
                 'Fermer'
+=======
+                'Error fatal: Fallo al intentar cargar el distribution index.',
+                'Hubo un fallo de conexion con el servidor de distribucion de Aren Server. No se pudo descargar ningun archivo!. <br><br>El Distribution index, provee al launcher la informacion acerca de los mods del server. Si queres una solucion rapida, en los mensajes fijados de Discord en el canal de #consultas hay una serie de pasos para arreglarlo rapidamente!',
+                'Cerrar'
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
             )
             setOverlayHandler(() => {
                 const window = remote.getCurrentWindow()
@@ -341,10 +347,10 @@ async function validateSelectedAccount(){
             ConfigManager.save()
             const accLen = Object.keys(ConfigManager.getAuthAccounts()).length
             setOverlayContent(
-                'Failed to Refresh Login',
-                `We were unable to refresh the login for <strong>${selectedAcc.displayName}</strong>. Please ${accLen > 0 ? 'select another account or ' : ''} login again.`,
+                'Fallo al refrescar el login',
+                `No se pudo refrescar tu login! (Probablemente por estar crackeado!) <strong>${selectedAcc.displayName}</strong>. Por favor ${accLen > 0 ? 'selecciona otra cuenta ' : ''} o logueate otra vez.`,
                 'Login',
-                'Select Another Account'
+                'Elegir otra cuenta'
             )
             setOverlayHandler(() => {
                 document.getElementById('loginUsername').value = selectedAcc.username

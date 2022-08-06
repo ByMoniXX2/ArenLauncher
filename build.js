@@ -18,10 +18,17 @@ function getCurrentPlatform(){
 builder.build({
     targets: (process.argv[2] != null && Platform[process.argv[2]] != null ? Platform[process.argv[2]] : getCurrentPlatform()).createTarget(),
     config: {
+<<<<<<< HEAD
         appId: 'rtmclauncher',
         productName: 'RTMC Launcher',
         artifactName: '${productName}-setup-${version}.${ext}',
         copyright: 'Copyright © 2018-2020 Daniel Scalzi et GeekCorner',
+=======
+        appId: 'Aren Launcher',
+        productName: 'Aren Launcher',
+        artifactName: '${productName}-instalador-${version}.${ext}',
+        copyright: 'Copyright © 2021 ByMoniXX',
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
         directories: {
             buildResources: 'build',
             output: 'dist'
@@ -46,12 +53,20 @@ builder.build({
         },
         linux: {
             target: 'AppImage',
+<<<<<<< HEAD
             maintainer: 'GeekCorner',
             vendor: 'GeekCorner',
             synopsis: 'Launcher pour RTMC',
             description: 'Launcher pour RTMC permettant de rejoindre les différents modes de jeux..',
             category: 'Game',
             artifactName: '${productName}-linux-${version}.${ext}'
+=======
+            maintainer: 'ByMoniXX',
+            vendor: 'ByMoniXX',
+            synopsis: 'Launcher de Minecraft Modificado Para Tener Acceso A ArenServer',
+            description: 'Launcher modificado que permite el acceso a ArenServer, las actualizaciones son automaticas.',
+            category: 'Game'
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
         },
         compression: 'maximum',
         files: [
@@ -66,4 +81,8 @@ builder.build({
     console.log('Build complete!')
 }).catch(err => {
     console.error('Error during build!', err)
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b

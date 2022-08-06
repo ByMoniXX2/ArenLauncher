@@ -562,14 +562,19 @@ exports.pullRemote = function(){
         return exports.pullLocal()
     }
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
         const distroURL = 'http://RTMC.fr/launcher/distribution.json'
         //const distroURL = 'https://raw.githubusercontent.com/GeekCornerGH/RTMC-Launcher/master/app/assets/distribution.json'
         //const distroURL = 'https://raw.githubusercontent.com/GeekCornerGH/RTMC-Launcher/114bdea18c03517649c47b17a69388f39c34e158/app/assets/distribution.json'
         //const distroURL = 'http://mc.westeroscraft.com/WesterosCraftLauncher/distribution.json'
         //const distroURL = 'https://gist.githubusercontent.com/dscalzi/53b1ba7a11d26a5c353f9d5ae484b71b/raw/'
+=======
+        const distroURL = 'https://gist.githubusercontent.com/ByMoniXX2/7f6d19b6b645c0cbfb6865d392ae61d8/raw/24859b1ec62615aa444354065ed047bcf169d242/distribution.json'
+        //const distroURL = 'https://gist.githubusercontent.com/ByMoniXX2/7f6d19b6b645c0cbfb6865d392ae61d8/raw/24859b1ec62615aa444354065ed047bcf169d242/distribution.json'
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
         const opts = {
             url: distroURL,
-            timeout: 2500
+            timeout: 10000
         }
         const distroDest = path.join(ConfigManager.getLauncherDirectory(), 'distribution.json')
         request(opts, (error, resp, body) => {

@@ -1262,7 +1262,26 @@ input:checked + .toggleSwitchSlider:before {
     text-shadow: 0px 0px 20px white;
 }
 
+<<<<<<< HEAD
 /* Description for the File selectors. */
+=======
+/* Button to open the java folder. */
+#settingsJavaFileSystemButton {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(126, 126, 126, 0.57);
+    border-radius: 3px;
+    height: 20px;
+    width: 90%;
+    text-align: center;
+    padding: 0px 50px;
+    cursor: pointer;
+    outline: none;
+    transition: 0.25s ease;
+    margin-bottom: 10px;
+}
+
+/* Description for the file selector. */
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
 .settingsFileSelDesc {
     font-size: 10px;
     margin: 20px 0px;

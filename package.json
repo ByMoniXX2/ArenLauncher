@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "helioslauncher",
   "version": "1.8.0",
@@ -48,3 +49,59 @@
     "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
   }
 }
+=======
+{
+  "name": "arenlauncher",
+  "version": "1.9.0",
+  "productName": "Aren Launcher",
+  "description": "Launcher Para Streamers De Twitch",
+  "author": "ByMoniXX (https://github.com/ByMoniXX2)",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/dzcalzi/HeliosLauncher",
+  "bugs": {
+    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
+  },
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "cilinux": "node build.js WINDOWS && node build.js LINUX",
+    "cidarwin": "node build.js MAC",
+    "dist": "cross-env ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true node build.js",
+    "dist:win": "npm run dist -- WINDOWS",
+    "dist:mac": "npm run dist -- MAC",
+    "dist:linux": "npm run dist -- LINUX",
+    "lint": "eslint --config .eslintrc.json ."
+  },
+  "engines": {
+    "node": "12.x.x"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.1",
+    "async": "^3.2.0",
+    "discord-rpc": "^3.2.0",
+    "ejs": "^3.1.5",
+    "ejs-electron": "^2.1.1",
+    "electron-updater": "^4.3.5",
+    "fs-extra": "^9.0.1",
+    "github-syntax-dark": "^0.5.0",
+    "jquery": "^3.5.1",
+    "node-machine-id": "^1.1.12",
+    "request": "^2.88.2",
+    "semver": "^7.3.4",
+    "tar-fs": "^2.1.1",
+    "uuid": "^8.3.2",
+    "winreg": "^1.2.4"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "electron": "^11.4.7",
+    "electron-builder": "^22.11.5",
+    "eslint": "^7.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ByMoniXX2/ArenLauncher.git"
+  }
+}
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b

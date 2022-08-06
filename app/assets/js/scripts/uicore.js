@@ -5,11 +5,10 @@
  * modules, excluding dependencies.
  */
 // Requirements
-const $                              = require('jquery')
-const {ipcRenderer, shell, webFrame} = require('electron')
-const remote                         = require('@electron/remote')
-const isDev                          = require('./assets/js/isdev')
-const LoggerUtil                     = require('./assets/js/loggerutil')
+const $                                      = require('jquery')
+const {ipcRenderer, remote, shell, webFrame} = require('electron')
+const isDev                                  = require('./assets/js/isdev')
+const LoggerUtil                             = require('./assets/js/loggerutil')
 
 const loggerUICore             = LoggerUtil('%c[UICore]', 'color: #000668; font-weight: bold')
 const loggerAutoUpdater        = LoggerUtil('%c[AutoUpdater]', 'color: #000668; font-weight: bold')
@@ -27,11 +26,17 @@ window.eval = global.eval = function () {
 
 // Display warning when devtools window is opened.
 remote.getCurrentWebContents().on('devtools-opened', () => {
+<<<<<<< HEAD
     console.log('%cIl ne fait pas bon de traîner ici.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
     console.log('%cSi quelqun vous a demandé de coller ou écrire quelque chose ici, il y a 11 chances sur 10 que ce soit une tentative de piratage.', 'font-size: 16px')
     console.log('%cIl vaut mieux fermer cette fenêtre et retourner à la sécurité.', 'font-size: 16px')
     console.log('%cSi vous savez ce que vous faites, vous devriez venir travailler chez nous.', 'font-size: 16px')
     console.log('%cSinon, veuillez presser la croix en haut à droite afin de revenir à la sécurité...', 'font-size: 16px')
+=======
+    console.log('%cLa consola es oscura y llena de terrores.', 'color: white; -webkit-text-stroke: 4px #a02d2a; font-size: 60px; font-weight: bold')
+    console.log('%cSi alguien te dijo que pegues algo aca, no le des bola.', 'font-size: 16px')
+    console.log('%cA menos que ByMoniXX te lo haya dicho xd.', 'font-size: 16px')
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
 })
 
 // Disable zoom, needed for darwin.
@@ -44,6 +49,7 @@ if(!isDev){
     ipcRenderer.on('autoUpdateNotification', (event, arg, info) => {
         switch(arg){
             case 'checking-for-update':
+<<<<<<< HEAD
                 loggerAutoUpdater.log('Checking for update..')
                 settingsUpdateButtonStatus('Vérification des mises à jour...', true)
                 break
@@ -52,14 +58,29 @@ if(!isDev){
                 
                 if(process.platform === 'darwin'){
                     info.darwindownload = `https://github.com/GeekCornerGH/RTMC-launcher/releases/download/v${info.version}/RTMC-launcher-${info.version}${process.arch === 'arm64' ? 'arm64' : ''}.dmg`
+=======
+                loggerAutoUpdater.log('Revisando si hay actualizaciones..')
+                settingsUpdateButtonStatus('Revisando si hay actualizaciones..', true)
+                break
+            case 'update-available':
+                loggerAutoUpdaterSuccess.log('Nueva actualizacion disponible', info.version)
+                
+                if(process.platform === 'darwin'){
+                    info.darwindownload = `https://github.com/Chesvin1/FarfaniaLauncherLauncher/releases/download/v${info.version}/farfanialauncher-setup-${info.version}.dmg`
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
                     showUpdateUI(info)
                 }
                 
                 populateSettingsUpdateInformation(info)
                 break
             case 'update-downloaded':
+<<<<<<< HEAD
                 loggerAutoUpdaterSuccess.log('La mise à jour ' + info.version + ' est prête à être installée .')
                 settingsUpdateButtonStatus('Installer maintenant', false, () => {
+=======
+                loggerAutoUpdaterSuccess.log('Actualizar ' + info.version + ' listo para ser instalado.')
+                settingsUpdateButtonStatus('Instalar ahora', false, () => {
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
                     if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
@@ -67,8 +88,13 @@ if(!isDev){
                 showUpdateUI(info)
                 break
             case 'update-not-available':
+<<<<<<< HEAD
                 loggerAutoUpdater.log('Vous disposez déjà de la dernière version .')
                 settingsUpdateButtonStatus('Vérifier les mises à jour')
+=======
+                loggerAutoUpdater.log('No se encontro una nueva actualizacion.')
+                settingsUpdateButtonStatus('Revisar si hay actualizaciones')
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
                 break
             case 'ready':
                 updateCheckListener = setInterval(() => {
@@ -79,9 +105,13 @@ if(!isDev){
             case 'realerror':
                 if(info != null && info.code != null){
                     if(info.code === 'ERR_UPDATER_INVALID_RELEASE_FEED'){
-                        loggerAutoUpdater.log('No suitable releases found.')
+                        loggerAutoUpdater.log('No se encontro ninguna actualizacion adecuada.')
                     } else if(info.code === 'ERR_XML_MISSED_ELEMENT'){
+<<<<<<< HEAD
                         loggerAutoUpdater.log('Aucune version trouvée.')
+=======
+                        loggerAutoUpdater.log('No se encontro ninguna actualizacion.')
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
                     } else {
                         loggerAutoUpdater.error('Error during update check..', info)
                         loggerAutoUpdater.debug('Error Code:', info.code)
@@ -209,7 +239,7 @@ $(document).on('click', 'a[href^="http"]', function(event) {
  * DevTools, for example the chrome debugger in VS Code. 
  */
 document.addEventListener('keydown', function (e) {
-    if((e.key === 'I' || e.key === 'i') && e.ctrlKey && e.shiftKey){
+    if((e.key === 'I' || e.key === 'i') && e.ctrlKey){
         let window = remote.getCurrentWindow()
         window.toggleDevTools()
     }

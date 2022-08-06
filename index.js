@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 const remoteMain = require('@electron/remote/main')
 remoteMain.initialize()
 
+=======
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
 // Requirements
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const autoUpdater                   = require('electron-updater').autoUpdater

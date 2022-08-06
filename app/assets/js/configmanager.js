@@ -6,10 +6,14 @@ const logger = require('./loggerutil')('%c[ConfigManager]', 'color: #a02d2a; fon
 
 const sysRoot = process.env.APPDATA || (process.platform == 'darwin' ? process.env.HOME + '/Library/Application Support' : process.env.HOME)
 // TODO change
+<<<<<<< HEAD
 const dataPath = path.join(sysRoot, '.RTMC')
+=======
+const dataPath = path.join(sysRoot, '.arenlauncher')
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
 
 // Forked processes do not have access to electron, so we have this workaround.
-const launcherDir = process.env.CONFIG_DIRECT_PATH || require('@electron/remote').app.getPath('userData')
+const launcherDir = process.env.CONFIG_DIRECT_PATH || require('electron').remote.app.getPath('userData')
 
 /**
  * Retrieve the absolute path of the launcher directory.
@@ -63,14 +67,22 @@ const firstLaunch = !fs.existsSync(configPath) && !fs.existsSync(configPathLEGAC
 
 exports.getAbsoluteMinRAM = function(){
     const mem = os.totalmem()
+<<<<<<< HEAD
     return mem >= 6000000000 ? 1 : 2
+=======
+    return mem >= 6000000000 ? 0.5 : 0.5
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
 }
 
 exports.getAbsoluteMaxRAM = function(){
     const mem = os.totalmem()
     const gT16 = mem-16000000000
+<<<<<<< HEAD
     //return Math.floor((mem-1000000000-(gT16 > 0 ? (Number.parseInt(gT16/8) + 16000000000/4) : mem/4))/1000000000)
     return Math.floor((mem/1000000000))
+=======
+    return Math.floor((mem-1000000000)/1000000000)
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
 }
 
 function resolveMaxRAM(){
@@ -106,9 +118,14 @@ const DEFAULT_CONFIG = {
             resWidth: 1280,
             resHeight: 720,
             fullscreen: false,
+<<<<<<< HEAD
             autoConnect: true,
             launchDetached: true,
             consoleOnLaunch: false
+=======
+            autoConnect: false,
+            launchDetached: true
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
         },
         launcher: {
             allowPrerelease: false,

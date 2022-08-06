@@ -1,5 +1,6 @@
-<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="aventium softworks"></p>
+<p align="center"><img src="./app/assets/images/SealCircle.png" width="720px" height="720px" alt="aventium softworks"></p>
 
+<<<<<<< HEAD
 <h1 align="center">RTMC Launcher</h1>
 [<p align="center"><img src="https://img.shields.io/travis/com/GeekCornerGH/RTMC-launcher.svg?style=for-the-badge" alt="travis">](https://travis-ci.com/github/GeekCornergh/RTMC-launcher) [<img src="https://img.shields.io/github/downloads/GeekCornergh/RTMC-launcher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/GeekCornerGH/RTMC-launcher/releases)</p>
 
@@ -57,3 +58,12 @@ Téléchargez le launcher depuis l'onglet [Releases](https://github.com/GeekCorn
 ### Rendez vous in game!
 
 
+=======
+<h1 align="center">Aren Launcher</h1>
+
+<em><h5 align="center">(fork of Helios)</h5></em>
+
+[<p align="center"><img src="https://img.shields.io/travis/dscalzi/HeliosLauncher.svg?style=for-the-badge" alt="travis">](https://travis-ci.org/Chesvin1/FarfaniaLauncher) [<img src="https://img.shields.io/github/downloads/dscalzi/HeliosLauncher/total.svg?style=for-the-badge" alt="downloads">](https://github.com/ByMoniXX2/ArenLauncher/releases)
+
+<p align="center">This is a launcher made for the server Aren, automatically installs all the mods required.</p>
+>>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
