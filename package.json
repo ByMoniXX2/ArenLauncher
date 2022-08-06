@@ -1,55 +1,3 @@
-<<<<<<< HEAD
-{
-  "name": "helioslauncher",
-  "version": "1.8.0",
-  "productName": "Helios Launcher",
-  "description": "Modded Minecraft Launcher",
-  "author": "Daniel Scalzi (https://github.com/dscalzi/)",
-  "license": "UNLICENSED",
-  "homepage": "https://github.com/dscalzi/HeliosLauncher",
-  "bugs": {
-    "url": "https://github.com/dscalzi/HeliosLauncher/issues"
-  },
-  "private": true,
-  "main": "index.js",
-  "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder build",
-    "dist:win": "npm run dist -- -w",
-    "dist:mac": "npm run dist -- -m",
-    "dist:linux": "npm run dist -- -l",
-    "lint": "eslint --config .eslintrc.json ."
-  },
-  "engines": {
-    "node": "14.x.x"
-  },
-  "dependencies": {
-    "@electron/remote": "^2.0.1",
-    "adm-zip": "^0.5.7",
-    "async": "^3.2.1",
-    "discord-rpc": "^3.2.0",
-    "ejs": "^3.1.6",
-    "ejs-electron": "^2.1.1",
-    "electron-updater": "^4.3.9",
-    "fs-extra": "^10.0.0",
-    "github-syntax-dark": "^0.5.0",
-    "jquery": "^3.6.0",
-    "request": "^2.88.2",
-    "semver": "^7.3.5",
-    "tar-fs": "^2.1.1",
-    "winreg": "^1.2.4"
-  },
-  "devDependencies": {
-    "electron": "^13.5.1",
-    "electron-builder": "^22.11.7",
-    "eslint": "^7.32.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dscalzi/HeliosLauncher.git"
-  }
-}
-=======
 {
   "name": "arenlauncher",
   "version": "1.9.0",
@@ -104,4 +52,3 @@
     "url": "git+https://github.com/ByMoniXX2/ArenLauncher.git"
   }
 }
->>>>>>> 84bce131c1b6d94e2fbe150ae671f30b387dc63b
